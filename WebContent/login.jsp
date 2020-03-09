@@ -78,7 +78,7 @@
 <div class="loginWrapper">
     <div class="loginLogo"><img src="${pageContext.request.contextPath}/static/images/loginLogo.png" alt="" /></div>
     <div class="widget">
-        <div class="title"><img src="${pageContext.request.contextPath}/static/images/icons/dark/files.png" alt="" class="titleIcon" /><h6>登录模块</h6></div>
+        <div class="title"><img src="${pageContext.request.contextPath}/static/images/icons/dark/files.png" alt="" class="titleIcon" /><h6>&nbsp;</h6></div>
         <form action="index.html" id="validate" class="form">
             <fieldset>
                 <div class="formRow">
@@ -106,7 +106,7 @@
 
 <!-- Footer line -->
 <div id="footer">
-    <div class="wrapper">@BBS论坛专有<a href="#">论坛之家</a> - Collect from <a href="#">网页</a></div>
+    <div class="wrapper">&nbsp;</div>
 </div>
 
 
