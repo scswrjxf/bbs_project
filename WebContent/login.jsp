@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-<title>Crown - premium responsive admin template for backend systems</title>
+<title>登录</title>
 <link href="${pageContext.request.contextPath}/static/css/main.css" rel="stylesheet" type="text/css" />
 
 <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
@@ -94,7 +94,7 @@
                 </div>
                 
                 <div class="loginControl">
-                    <input type="button" value="注册" class="dredB logMeIn" style="margin-left:20px;"/>
+                    <a href="${pageContext.request.contextPath}/register.jsp"><input type="button" value="注册" class="dredB logMeIn" style="margin-left:20px;"/></a>
                     <input type="submit" value="登录" class="dredB logMeIn" />
                     <a href="#">忘记密码</a>
                     <div class="clear"></div>
