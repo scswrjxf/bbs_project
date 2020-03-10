@@ -4,7 +4,7 @@ Source Host: localhost
 Source Database: bbs_system
 Target Host: localhost
 Target Database: bbs_system
-Date: 2020/3/9 15:33:41
+Date: 2020/3/10 10:57:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -124,3 +124,6 @@ INSERT INTO `bbs_level` VALUES ('1', '初级会员');
 INSERT INTO `bbs_level` VALUES ('2', '中级会员');
 INSERT INTO `bbs_level` VALUES ('3', '高级会员');
 INSERT INTO `bbs_level` VALUES ('4', '系统管理员');
+INSERT INTO `bbs_user` VALUES ('aaa', '202cb962ac59075b964b07152d234b70', '小六', '221@qq.com', '男', 'xxx.jpg', '0', '1', null, null, '2020-03-10');
+INSERT INTO `bbs_user` VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', '系统管理员', 'xxx@qq.com', '男', 'xxx.jpg', '0', '4', null, null, null);
+INSERT INTO `bbs_user` VALUES ('zhangSan', '202cb962ac59075b964b07152d234b70', '小三子', '111@qq.com', '女', 'xxx.jpg', '0', '1', null, null, '2020-03-10');

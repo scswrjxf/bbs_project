@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-<title>登录</title>
+<title>管理员页面</title>
 <link href="${pageContext.request.contextPath}/static/css/main.css" rel="stylesheet" type="text/css" />
 
 <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
@@ -59,57 +59,59 @@
 
 <!-- Shared on MafiaShare.net  --><!-- Shared on MafiaShare.net  --></head>
 
-<body class="nobg loginPage">
+<body>
 
-<!-- Top fixed navigation -->
-<div class="topNav">
-    <div class="wrapper">
-        <div class="userNav">
-            <ul>
-                <li><a href="${pageContext.request.contextPath}/index.jsp" title=""><img src="${pageContext.request.contextPath}/static/images/icons/topnav/mainWebsite.png" alt="" /><span>回到首页</span></a></li>
-            </ul>
+<!-- Left side content -->
+<div id="leftSide">
+    <div class="logo"><a href="index.html"><img src="${pageContext.request.contextPath}/static/images/logo.png" alt="" /></a></div>
+</div>
+
+
+<!-- Right side -->
+<div id="rightSide">
+
+    <!-- Top fixed navigation -->
+    <div class="topNav">
+        <div class="wrapper">
+            <div class="welcome"><a href="#" title=""><img src="${pageContext.request.contextPath}/static/images/userPic.png" alt="" /></a><span>Howdy, Eugene!</span></div>
+            <div class="userNav">
+                <ul>
+                    <li><a href="${pageContext.request.contextPath}/login.jsp" title=""><img src="${pageContext.request.contextPath}/static/images/icons/topnav/logout.png" alt="" /><span>登出</span></a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
         </div>
-        <div class="clear"></div>
     </div>
+    
+    <div class="line"></div>
+    
+    <!-- Page statistics area -->
+    <div class="statsRow">
+        <div class="wrapper">
+        	<div class="controlB">
+            	<ul>
+                	<li><a href="#" title=""><img src="${pageContext.request.contextPath}/static/images/icons/control/32/plus.png" alt="" /><span>Add new session</span></a></li>
+                    <li><a href="#" title=""><img src="${pageContext.request.contextPath}/static/images/icons/control/32/database.png" alt="" /><span>New DB entry</span></a></li>
+                    <li><a href="#" title=""><img src="${pageContext.request.contextPath}/static/images/icons/control/32/hire-me.png" alt="" /><span>Add new user</span></a></li>
+                    <li><a href="#" title=""><img src="${pageContext.request.contextPath}/static/images/icons/control/32/statistics.png" alt="" /><span>Check statistics</span></a></li>
+                    <li><a href="#" title=""><img src="${pageContext.request.contextPath}/static/images/icons/control/32/comment.png" alt="" /><span>Review comments</span></a></li>
+                    <li><a href="#" title=""><img src="${pageContext.request.contextPath}/static/images/icons/control/32/order-149.png" alt="" /><span>Check orders</span></a></li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer line -->
+    <div id="footer">
+        <div class="wrapper">&nbsp;</div>
+    </div>
+
 </div>
 
-
-<!-- Main content wrapper -->
-<div class="loginWrapper">
-    <div class="loginLogo"><img src="${pageContext.request.contextPath}/static/images/loginLogo.png" alt="" /></div>
-    <div class="widget">
-        <div class="title"><img src="${pageContext.request.contextPath}/static/images/icons/dark/files.png" alt="" class="titleIcon" /><h6>&nbsp;</h6></div>
-        <form action="index.html" id="validate" class="form">
-            <fieldset>
-                <div class="formRow">
-                    <label for="login">账户:</label>
-                    <div class="loginInput"><input type="text" name="login" class="validate[required]" id="login" /></div>
-                    <div class="clear"></div>
-                </div>
-                
-                <div class="formRow">
-                    <label for="pass">密码:</label>
-                    <div class="loginInput"><input type="password" name="password" class="validate[required]" id="pass" /></div>
-                    <div class="clear"></div>
-                </div>
-                
-                <div class="loginControl">
-                    <a href="${pageContext.request.contextPath}/register.jsp"><input type="button" value="注册" class="dredB logMeIn" style="margin-left:20px;"/></a>
-                    <input type="submit" value="登录" class="dredB logMeIn" />
-                    <a href="#">忘记密码</a>
-                    <div class="clear"></div>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-</div>    
-
-<!-- Footer line -->
-<div id="footer">
-    <div class="wrapper">&nbsp;</div>
-</div>
-
+<div class="clear"></div>
 
 </body>
 </html>
+
     

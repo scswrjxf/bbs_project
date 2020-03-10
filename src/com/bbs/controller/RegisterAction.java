@@ -30,6 +30,7 @@ public class RegisterAction extends HttpServlet {
 		String userSex = request.getParameter("userSex");
 		// 加密密码
 		userPsw = DigestUtils.md5Hex(userPsw);
+		// System.out.println(userPsw);
 		User user = new User(userId,userPsw,userAlice,userEmail,userSex,
 				null,null,null,null,null,new Date());
 		// 验证账户是否存在数据库中
