@@ -146,7 +146,7 @@
         <form id="validate" class="form" method="post" action="${pageContext.request.contextPath}/register">
         	<fieldset>
                 <div class="widget">
-                    <div class="title"><img src="${pageContext.request.contextPath}/static/images/icons/dark/alert.png" alt="" class="titleIcon" /></div>
+                    <div class="title" style="color:red;"><img src="${pageContext.request.contextPath}/static/images/icons/dark/alert.png" alt="" class="titleIcon" /><h6 style="color:red;">${empty message?'请注册':message}</h6></div>
                     <div class="formRow">
                         <label>账户:<span class="req">*</span></label>
                         <div class="formRight"><input type="text" class="validate[required]" name="userId" id="req"/></div><div class="clear"></div>
@@ -175,10 +175,7 @@
                         </div><div class="clear"></div>
                     </div>
                     <div class="formSubmit"><input type="submit" value="注册" class="redB" /></div>
-                    <div class="formRow">
-                        <label><span class="req">&nbsp;</span></label>
-                        <div class="formRight"><input type="text" style="color: red;text-align: right;" value="${empty message?'请注册':message}" readonly="readonly"/></div><div class="clear"></div>
-                    </div>
+                    
                     <div class="clear"></div>
                 </div>
                 

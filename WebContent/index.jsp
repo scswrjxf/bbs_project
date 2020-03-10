@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,11 +95,21 @@
     <!-- Top fixed navigation -->
     <div class="topNav">
         <div class="wrapper">
-            <div class="welcome"><a href="#" title=""><img src="${pageContext.request.contextPath}/static/images/userPic.png" alt="" /></a><span>小三子</span></div>
+        	<!-- 登录才会显示用户头像和昵称 -->
+        	<c:if test="${!empty user }">
+        		<div class="welcome"><a href="#" title=""><img style="width:20px;" src="${pageContext.request.contextPath}/static/file/${user.userPhoto}" alt="" /></a><span>${user.userAlice}</span></div>
+        	</c:if>
             <div class="userNav">
                 <ul>
                     <li><a href="#" title=""><img src="${pageContext.request.contextPath}/static/images/icons/topnav/settings.png" alt="" /><span>设置</span></a></li>
-                    <li><a href="${pageContext.request.contextPath}/login.jsp" title=""><img src="${pageContext.request.contextPath}/static/images/icons/topnav/logout.png" alt="" /><span>登出</span></a></li>
+                    <li><a href="${pageContext.request.contextPath}/login.jsp" title=""><img src="${pageContext.request.contextPath}/static/images/icons/topnav/logout.png" alt="" />
+                    	<c:if test="${!empty user }">
+                    		<span>登出</span>
+                    	</c:if>
+                    	<c:if test="${empty user }">
+                    		<span>请登录</span>
+                    	</c:if>
+                    </a></li>
                 </ul>
             </div>
             <div class="clear"></div>

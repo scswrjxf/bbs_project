@@ -22,4 +22,13 @@ public class UserService {
 	public int addUser(User user) {
 		return userDao.addUser(user);
 	}
+	/**
+	 * 根据账户和密码查找对应账户
+	 * @param userId
+	 * @param userPsw
+	 * @return 找到返回账户 失败返回null
+	 */
+	public User findUserByIdAndPsw(String userId,String userPsw) {
+		return userDao.findUserByIdAndPsw(userId, userPsw);
+	}
 }

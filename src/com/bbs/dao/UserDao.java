@@ -64,4 +64,35 @@ public class UserDao {
 		}
 		return 0;
 	}
+	/**
+	 * 根据账户和密码查找对应账户
+	 * @param userId
+	 * @param userPsw
+	 * @return 找到返回账户 失败返回null
+	 */
+	public User findUserByIdAndPsw(String userId,String userPsw) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		User user = null;
+		try {
+			con = BaseDao.getCon();
+			String sql = "select * from bbs_user where userId=? and userPsw=?";
+			ps = con.prepareStatement(sql);
+			rs = BaseDao.query(ps,new Object[] {userId,userPsw});
+			if(rs.next()) {
+				user = new User(
+					rs.getString("userId"),rs.getString("userPsw"),
+					rs.getString("userAlice"),
+					rs.getString("userEmail"),rs.getString("userSex"),
+					rs.getString("userPhoto"),rs.getDouble("userScore"),
+					rs.getInt("userLevel"),rs.getDate("levelDown"),
+					rs.getDate("userLock"),rs.getDate("userCreateDate"));
+			}
+		} catch (Exception e) {e.printStackTrace();
+		} finally {
+			BaseDao.close(con, ps, rs);
+		}
+		return user;
+	}
 }

@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<!-- 没有登录 -->
+<c:if test="${empty user }">
+	<!-- 跳转到login.jsp(d动作标签) -->
+	<jsp:forward page="login.jsp" />
+</c:if>
+<!-- 如果是一般用户，也不能直接访问 -->
+<c:if test="${user.userLevel != 4 }">
+	<jsp:forward page="login.jsp" />
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,7 +83,7 @@
     <!-- Top fixed navigation -->
     <div class="topNav">
         <div class="wrapper">
-            <div class="welcome"><a href="#" title=""><img src="${pageContext.request.contextPath}/static/images/userPic.png" alt="" /></a><span>Howdy, Eugene!</span></div>
+            <div class="welcome"><a href="#" title=""><img style="width:20px;" src="${pageContext.request.contextPath}/static/file/${user.userPhoto}" alt="" /></a><span>${user.userAlice}</span></div>
             <div class="userNav">
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/login.jsp" title=""><img src="${pageContext.request.contextPath}/static/images/icons/topnav/logout.png" alt="" /><span>登出</span></a></li>

@@ -78,18 +78,18 @@
 <div class="loginWrapper">
     <div class="loginLogo"><img src="${pageContext.request.contextPath}/static/images/loginLogo.png" alt="" /></div>
     <div class="widget">
-        <div class="title"><img src="${pageContext.request.contextPath}/static/images/icons/dark/files.png" alt="" class="titleIcon" /><h6>&nbsp;</h6></div>
-        <form action="index.html" id="validate" class="form">
+        <div class="title"><img src="${pageContext.request.contextPath}/static/images/icons/dark/files.png" alt="" class="titleIcon" /><h6 style="color:red;">${empty message?'请登录':message}</h6></div>
+        <form action="${pageContext.request.contextPath}/login" id="validate" class="form">
             <fieldset>
                 <div class="formRow">
                     <label for="login">账户:</label>
-                    <div class="loginInput"><input type="text" name="login" class="validate[required]" id="login" /></div>
+                    <div class="loginInput"><input type="text" name="userId" class="validate[required]" id="login" /></div>
                     <div class="clear"></div>
                 </div>
                 
                 <div class="formRow">
                     <label for="pass">密码:</label>
-                    <div class="loginInput"><input type="password" name="password" class="validate[required]" id="pass" /></div>
+                    <div class="loginInput"><input type="password" name="userPsw" class="validate[required]" id="pass" /></div>
                     <div class="clear"></div>
                 </div>
                 
@@ -99,6 +99,7 @@
                     <a href="#">忘记密码</a>
                     <div class="clear"></div>
                 </div>
+                
             </fieldset>
         </form>
     </div>
