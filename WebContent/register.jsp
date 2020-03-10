@@ -221,7 +221,7 @@
     <div class="wrapper">
         
         <!-- Validation form -->
-        <form id="validate" class="form" method="post" action="">
+        <form id="validate" class="form" method="post" action="${pageContext.request.contextPath}/register">
         	<fieldset>
                 <div class="widget">
                     <div class="title"><img src="${pageContext.request.contextPath}/static/images/icons/dark/alert.png" alt="" class="titleIcon" /></div>
@@ -253,6 +253,10 @@
                         </div><div class="clear"></div>
                     </div>
                     <div class="formSubmit"><input type="submit" value="注册" class="redB" /></div>
+                    <div class="formRow">
+                        <label><span class="req">&nbsp;</span></label>
+                        <div class="formRight"><input type="text" style="color: red;" value="${message}" readonly="readonly"/></div><div class="clear"></div>
+                    </div>
                     <div class="clear"></div>
                 </div>
                 
