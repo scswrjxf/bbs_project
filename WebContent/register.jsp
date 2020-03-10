@@ -235,11 +235,11 @@
                     </div>
                     <div class="formRow">
                         <label>确认密码:<span class="req">*</span></label>
-                        <div class="formRight"><input type="password" class="validate[required,equals[password]]" name="rePassword" id="password2" /></div><div class="clear"></div>
+                        <div class="formRight"><input type="password" class="validate[required,equals[password1]]" name="rePassword" id="password2" /></div><div class="clear"></div>
                     </div>
                     <div class="formRow">
                         <label>昵称:<span class="req">*</span></label>
-                        <div class="formRight"><input type="text" class="validate[required,minSize[6]]" name="userAlice" id="minValid"/></div><div class="clear"></div>
+                        <div class="formRight"><input type="text" class="validate[required]" name="userAlice" id="minValid"/></div><div class="clear"></div>
                     </div>
                     <div class="formRow">
                         <label>邮箱:<span class="req">*</span></label>
@@ -248,8 +248,8 @@
                     <div class="formRow">
                         <label>性别:<span class="req">*</span></label>
                         <div class="formRight">
-                            <div class="floatL" style="margin: 2px 0 0 0;"><input type="radio" id="radioReq1" name="userSex" checked="checked" data-prompt-position="topRight:102" /><label for="radioReq1">男</label></div>
-                        	<div class="floatL" style="margin: 2px 0 0 0;"><input type="radio" id="radioReq2" name="userSex" data-prompt-position="topRight:102" /><label for="radioReq2">女</label></div>
+                            <div class="floatL" style="margin: 2px 0 0 0;"><input type="radio" value="男" id="radioReq1" name="userSex" checked="checked" data-prompt-position="topRight:102" /><label for="radioReq1">男</label></div>
+                        	<div class="floatL" style="margin: 2px 0 0 0;"><input type="radio" value="女" id="radioReq2" name="userSex" data-prompt-position="topRight:102" /><label for="radioReq2">女</label></div>
                         </div><div class="clear"></div>
                     </div>
                     <div class="formSubmit"><input type="submit" value="注册" class="redB" /></div>
