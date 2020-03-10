@@ -1,15 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<!-- 没有登录 -->
-<c:if test="${empty user }">
-	<!-- 跳转到login.jsp(d动作标签) -->
-	<jsp:forward page="login.jsp" />
-</c:if>
-<!-- 如果是一般用户，也不能直接访问 -->
-<c:if test="${user.userLevel != 4 }">
-	<jsp:forward page="login.jsp" />
-</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,36 +63,20 @@
 <body>
 
 <!-- Left side content -->
-<div id="leftSide">
-    <div class="logo"><a href="index.html"><img src="${pageContext.request.contextPath}/static/images/logo.png" alt="" /></a></div>
-</div>
-
+<%@ include file="admin_left_side.jsp" %>
 
 <!-- Right side -->
 <div id="rightSide">
 
-    <!-- Top fixed navigation -->
-    <div class="topNav">
-        <div class="wrapper">
-            <div class="welcome"><a href="#" title=""><img style="width:20px;" src="${pageContext.request.contextPath}/static/file/${user.userPhoto}" alt="" /></a><span>${user.userAlice}</span></div>
-            <div class="userNav">
-                <ul>
-                    <li><a href="${pageContext.request.contextPath}/login.jsp" title=""><img src="${pageContext.request.contextPath}/static/images/icons/topnav/logout.png" alt="" /><span>登出</span></a></li>
-                </ul>
-            </div>
-            <div class="clear"></div>
-        </div>
-    </div>
-    
-    <div class="line"></div>
+	<%@ include file="admin_top_nav.jsp" %>
     
     <!-- Page statistics area -->
     <div class="statsRow">
         <div class="wrapper">
         	<div class="controlB">
             	<ul>
+            		<li><a href="#" title=""><img src="${pageContext.request.contextPath}/static/images/icons/control/32/database.png" alt="" /><span>板块管理</span></a></li>
                 	<li><a href="#" title=""><img src="${pageContext.request.contextPath}/static/images/icons/control/32/plus.png" alt="" /><span>Add new session</span></a></li>
-                    <li><a href="#" title=""><img src="${pageContext.request.contextPath}/static/images/icons/control/32/database.png" alt="" /><span>New DB entry</span></a></li>
                     <li><a href="#" title=""><img src="${pageContext.request.contextPath}/static/images/icons/control/32/hire-me.png" alt="" /><span>Add new user</span></a></li>
                     <li><a href="#" title=""><img src="${pageContext.request.contextPath}/static/images/icons/control/32/statistics.png" alt="" /><span>Check statistics</span></a></li>
                     <li><a href="#" title=""><img src="${pageContext.request.contextPath}/static/images/icons/control/32/comment.png" alt="" /><span>Review comments</span></a></li>

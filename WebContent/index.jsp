@@ -69,52 +69,13 @@
 <body>
 
 <!-- Left side content -->
-<div id="leftSide">
-    <div class="logo"><a href="index.html"><img src="${pageContext.request.contextPath}/static/images/logo.png" alt="" /></a></div>
-    
-    <div class="sidebarSep mt0"></div>
-    
-    <!-- Search widget -->
-    <form action="" class="sidebarSearch">
-        <input type="text" name="search" placeholder="search..." id="ac" />
-        <input type="submit" value="" />
-    </form>
-    
-    <div class="sidebarSep"></div>
-    
-    <!-- Left navigation -->
-    <ul id="menu" class="nav">
-        <li class="dash"><a href="index.html" title="" class="active"><span>Dashboard</span></a></li>
-    </ul>
-</div>
-
+<%@ include file="user_left_side.jsp" %>
 
 <!-- Right side -->
 <div id="rightSide">
 
     <!-- Top fixed navigation -->
-    <div class="topNav">
-        <div class="wrapper">
-        	<!-- 登录才会显示用户头像和昵称 -->
-        	<c:if test="${!empty user }">
-        		<div class="welcome"><a href="#" title=""><img style="width:20px;" src="${pageContext.request.contextPath}/static/file/${user.userPhoto}" alt="" /></a><span>${user.userAlice}</span></div>
-        	</c:if>
-            <div class="userNav">
-                <ul>
-                    <li><a href="#" title=""><img src="${pageContext.request.contextPath}/static/images/icons/topnav/settings.png" alt="" /><span>设置</span></a></li>
-                    <li><a href="${pageContext.request.contextPath}/login.jsp" title=""><img src="${pageContext.request.contextPath}/static/images/icons/topnav/logout.png" alt="" />
-                    	<c:if test="${!empty user }">
-                    		<span>登出</span>
-                    	</c:if>
-                    	<c:if test="${empty user }">
-                    		<span>请登录</span>
-                    	</c:if>
-                    </a></li>
-                </ul>
-            </div>
-            <div class="clear"></div>
-        </div>
-    </div>
+    <%@ include file="user_top_nav.jsp" %>
     
     <!-- Responsive header -->
     <div class="resp">
