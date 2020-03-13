@@ -71,21 +71,22 @@
 	<%@ include file="admin_top_nav.jsp" %>
     
     <!-- Form -->
-	<form action="" class="form">
+	<form action="${pageContext.request.contextPath}/alter_plate" class="form" method="post">
+		<input name="plateId" value="${param.plateId }" type="hidden"/>
 		<fieldset>
 			<div class="widget">
- 				<div class="title"><img src="${pageContext.request.contextPath}/static/images/icons/dark/list.png" alt="" class="titleIcon" /><h6>新建版块</h6></div>
+ 				<div class="title"><img src="${pageContext.request.contextPath}/static/images/icons/dark/list.png" alt="" class="titleIcon" /><h6>修改版块</h6></div>
   				<div class="formRow">
 					<label>版块标题:</label>
-					<div class="formRight"><input type="text" name="plateTitle" value="" required="required"/></div>
+					<div class="formRight"><input type="text" name="plateTitle" value="${param.plateTitle }" required="required"/></div>
        				<div class="clear"></div>
    				</div>
    				<div class="formRow">
      				<label>版块描述:</label>
-              		<div class="formRight"><textarea rows="8" cols="" name="plateMessage" required="required"></textarea></div>
+              		<div class="formRight"><textarea rows="8" cols="" name="plateMessage" required="required">${param.plateMessage }</textarea></div>
            			<div class="clear"></div>
         		</div>
-    			<div class="formSubmit"><input type="submit" value="添加版块" class="redB" /></div>
+    			<div class="formSubmit"><input type="submit" value="确定修改" class="redB" /></div>
        			<div class="clear"></div>
    			</div>
    		</fieldset>
@@ -99,84 +100,6 @@
 </div>
 
 <div class="clear"></div>
-<script>
-// 使用Ajax实现添加新版块功能
-$(function(){
-	$("form").submit(function(){
-		// 发送ajax请求
-		$.ajax({
-			type: "POST",
-			url: "${pageContext.request.contextPath}/add_plate",
-			data: $("form").serialize(),
-			success: function(msg){
-				var content = '';
-				content += '<div class="widget">'
-					+'<div class="title">'
-					+'<h6>'+msg.plateTitle+'</h6>'
-					+'<div class="textC">'
-					+'<a href="plate_alter.jsp?plateId='+msg.plateId+'&plateTitle='+msg.plateTitle+'&plateMessage='+msg.plateMessage+'" title="" class="button greenB"><span>修改版块</span></a>'
-					+'<a href="#" plateid="'+msg.plateId+'" onclick="deletePlate(this,event)" title="" class="button redB"><span>删除版块</span></a>'
-					+'</div>'
-					+'<div class="clear"></div>'
-					+'</div>'
-					+'<p>'+msg.plateMessage+'</p>'
-					+'</div>';
-				$("form").after(content);
-			},
-			error: function(XMLHttpRequest,textStatus,errorThrown) {
-			    alert(errorThrown);
-			}
-		});
-		// 不提交到后台
-		return false;
-	});
-});
-// 使用Ajax实现加载页面获取到所有的版块信息
-$(function(){
-	// 发送ajax请求，获取到所有版块信息
-	$.ajax({
-		type: "POST",
-		url: "${pageContext.request.contextPath}/list_plates",
-		success: function(msg){
-			var content = '';
-			for(var item in msg){
-				content += '<div class="widget">'
-					+'<div class="title">'
-					+'<h6>'+msg[item].plateTitle+'</h6>'
-					+'<div class="textC">'
-					+'<a href="plate_alter.jsp?plateId='+msg[item].plateId+'&plateTitle='+msg[item].plateTitle+'&plateMessage='+msg[item].plateMessage+'" title="" class="button greenB"><span>修改版块</span></a>'
-	 				+'<a href="#" plateid="'+msg[item].plateId+'" onclick="deletePlate(this,event)" title="" class="button redB"><span>删除版块</span></a>'
-					+'</div>'
-					+'<div class="clear"></div>'
-					+'</div>'
-					+'<p>'+msg[item].plateMessage+'</p>'
-					+'</div>';
-			}
-			$("form").after(content);
-		},
-		error: function(XMLHttpRequest,textStatus,errorThrown) {
-		    alert(errorThrown);
-		}
-	});
-});
-// 实现删除版块功能
-function deletePlate(that,event){
-	event.preventDefault();
-	// 发送Ajax请求
-	$.ajax({
-		type: "POST",
-		url: "${pageContext.request.contextPath}/delete_plate",
-		data: {plateId:$(that).attr("plateid")},
-		success: function(msg){
-			// 移除掉这块
-			$(that).parents("div[class='widget']").remove();
-		},
-		error: function(XMLHttpRequest,textStatus,errorThrown) {
-		    alert(errorThrown);
-		}
-	});
-}
-</script>
 </body>
 </html>
 

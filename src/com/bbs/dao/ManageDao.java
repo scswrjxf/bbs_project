@@ -90,6 +90,29 @@ public class ManageDao {
 		}
 		return 0;
 	}
+	/**
+	 * 修改plate的Titleh和Message
+	 * @param plate
+	 * @return 1-成功 0-失败
+	 */
+	public int alterPlate(Plate plate) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = BaseDao.getCon();
+			String sql = "update bbs_plate set plateTitle=?,plateMessage=? "
+					+ "where plateId=?";
+			ps = con.prepareStatement(sql);
+			return BaseDao.update(ps, new Object[] {
+				plate.getPlateTitle(),plate.getPlateMessage(),plate.getPlateId()
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			BaseDao.close(con, ps, null);
+		}
+		return 0;
+	}
 }
 
 

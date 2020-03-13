@@ -31,4 +31,12 @@ public class ManageService {
 	public int deltePlateById(Integer plateId) {
 		return manageDao.deltePlateById(plateId);
 	}
+	/**
+	 * 修改plate的Titleh和Message
+	 * @param plate
+	 * @return 1-成功 0-失败
+	 */
+	public int alterPlate(Plate plate) {
+		return manageDao.alterPlate(plate);
+	}
 }
