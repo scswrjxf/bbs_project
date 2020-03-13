@@ -114,9 +114,9 @@ $(function(){
 					+'<div class="title">'
 					+'<h6>'+msg.plateTitle+'</h6>'
 					+'<div class="textC">'
-					+'<a href="?plateId='+msg.plateId+'" title="" class="button greenB"><span>修改版块</span></a>'
-	 				+'<a href="?plateId='+msg.plateId+'" title="" class="button redB"><span>删除版块</span></a>'
-	        		+'</div>'
+					+'<a href="#" plateId="'+msg.plateId+'" title="" class="button greenB"><span>修改版块</span></a>'
+					+'<a href="#" plateid="'+msg.plateId+'" onclick="deletePlate(this,event)" title="" class="button redB"><span>删除版块</span></a>'
+					+'</div>'
 					+'<div class="clear"></div>'
 					+'</div>'
 					+'<p>'+msg.plateMessage+'</p>'
@@ -144,9 +144,9 @@ $(function(){
 					+'<div class="title">'
 					+'<h6>'+msg[item].plateTitle+'</h6>'
 					+'<div class="textC">'
-					+'<a href="?plateId='+msg[item].plateId+'" title="" class="button greenB"><span>修改版块</span></a>'
-	 				+'<a href="?plateId='+msg[item].plateId+'" title="" class="button redB"><span>删除版块</span></a>'
-	        		+'</div>'
+					+'<a href="#" title="" class="button greenB"><span>修改版块</span></a>'
+	 				+'<a href="#" plateid="'+msg[item].plateId+'" onclick="deletePlate(this,event)" title="" class="button redB"><span>删除版块</span></a>'
+					+'</div>'
 					+'<div class="clear"></div>'
 					+'</div>'
 					+'<p>'+msg[item].plateMessage+'</p>'
@@ -159,6 +159,23 @@ $(function(){
 		}
 	});
 });
+// 实现删除版块功能
+function deletePlate(that,event){
+	event.preventDefault();
+	// 发送Ajax请求
+	$.ajax({
+		type: "POST",
+		url: "${pageContext.request.contextPath}/delete_plate",
+		data: {plateId:$(that).attr("plateid")},
+		success: function(msg){
+			// 移除掉这块
+			$(that).parents("div[class='widget']").remove();
+		},
+		error: function(XMLHttpRequest,textStatus,errorThrown) {
+		    alert(errorThrown);
+		}
+	});
+}
 </script>
 </body>
 </html>

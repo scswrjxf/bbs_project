@@ -38,7 +38,7 @@ public class ManageDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			BaseDao.close(con, ps, null);
+			BaseDao.close(con, ps, rs);
 		}
 		return null;
 	}
@@ -54,7 +54,7 @@ public class ManageDao {
 		List<Plate> plates = new ArrayList<>();
 		try {
 			con = BaseDao.getCon();
-			String sql = "select * from bbs_plate";
+			String sql = "select * from bbs_plate order by plateId desc";
 			ps = con.prepareStatement(sql);
 			rs = BaseDao.query(ps,null);
 			// 逐行把信息读取出来，放入列表中
@@ -69,6 +69,26 @@ public class ManageDao {
 			BaseDao.close(con, ps, rs);
 		}
 		return plates;
+	}
+	/**
+	 * 根据plateId删除对应版块信息
+	 * @param plateId
+	 * @return 1-成功 0-失败
+	 */
+	public int deltePlateById(Integer plateId) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = BaseDao.getCon();
+			String sql = "delete from bbs_plate where plateId=?";
+			ps = con.prepareStatement(sql);
+			return BaseDao.update(ps, new Object[] {plateId});
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			BaseDao.close(con, ps, null);
+		}
+		return 0;
 	}
 }
 

@@ -23,4 +23,12 @@ public class ManageService {
 	public List<Plate> listPlates(){
 		return manageDao.listPlates();
 	}
+	/**
+	 * 根据plateId删除对应版块信息
+	 * @param plateId
+	 * @return 1-成功 0-失败
+	 */
+	public int deltePlateById(Integer plateId) {
+		return manageDao.deltePlateById(plateId);
+	}
 }
