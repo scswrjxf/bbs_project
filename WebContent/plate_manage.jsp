@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-<title>管理员页面</title>
+<title>板块管理</title>
 <link href="${pageContext.request.contextPath}/static/css/main.css" rel="stylesheet" type="text/css" />
 
 <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
@@ -70,6 +70,33 @@
 
 	<%@ include file="admin_top_nav.jsp" %>
     
+    <!-- Form -->
+	<form action="" class="form">
+		<fieldset>
+			<div class="widget">
+ 				<div class="title"><img src="${pageContext.request.contextPath}/static/images/icons/dark/list.png" alt="" class="titleIcon" /><h6>新建版块</h6></div>
+  				<div class="formRow">
+					<label>版块标题:</label>
+					<div class="formRight"><input type="text" name="plateTitle" value="" required="required"/></div>
+       				<div class="clear"></div>
+   				</div>
+   				<div class="formRow">
+     				<label>版块描述:</label>
+              		<div class="formRight"><textarea rows="8" cols="" name="plateMessage" required="required"></textarea></div>
+           			<div class="clear"></div>
+        		</div>
+    			<div class="formSubmit"><input type="submit" value="添加版块" class="redB" /></div>
+       			<div class="clear"></div>
+   			</div>
+   		</fieldset>
+   	</form>
+    
+    <!-- Full width -->
+	<div class="widget">
+		<div class="title"><h6>Full width</h6><div class="clear"></div></div>
+		<p>Fusce luctus libero porta eros molestie sed varius nulla pharetra. Praesent elementum convallis felis, et scelerisque ipsum ullamcorper sit amet. Fusce vitae diam dui. Phasellus non nulla nisi. Suspendisse interdum massa vulputate ligula fermentum id tempor eros dictum.</p>
+	</div>
+    
     <!-- Footer line -->
     <div id="footer">
         <div class="wrapper">&nbsp;</div>
@@ -78,7 +105,27 @@
 </div>
 
 <div class="clear"></div>
-
+<script>
+// 使用Ajax实现添加新版块功能
+$(function(){
+	$("form").submit(function(){
+		// 发送ajax请求
+		$.ajax({
+			type: "POST",
+			url: "${pageContext.request.contextPath}/add_plate",
+			data: $("form").serialize(),
+			success: function(msg){
+				alert( "Data Saved: " + msg.plateTitle );
+			},
+			error: function(XMLHttpRequest,textStatus,errorThrown) {
+			    alert(errorThrown);
+			}
+		});
+		// 不提交到后台
+		return false;
+	});
+});
+</script>
 </body>
 </html>
 
