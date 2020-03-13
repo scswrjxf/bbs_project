@@ -91,12 +91,6 @@
    		</fieldset>
    	</form>
     
-    <!-- Full width -->
-	<div class="widget">
-		<div class="title"><h6>Full width</h6><div class="clear"></div></div>
-		<p>Fusce luctus libero porta eros molestie sed varius nulla pharetra. Praesent elementum convallis felis, et scelerisque ipsum ullamcorper sit amet. Fusce vitae diam dui. Phasellus non nulla nisi. Suspendisse interdum massa vulputate ligula fermentum id tempor eros dictum.</p>
-	</div>
-    
     <!-- Footer line -->
     <div id="footer">
         <div class="wrapper">&nbsp;</div>
@@ -115,7 +109,19 @@ $(function(){
 			url: "${pageContext.request.contextPath}/add_plate",
 			data: $("form").serialize(),
 			success: function(msg){
-				alert( "Data Saved: " + msg.plateTitle );
+				var content = '';
+				content += '<div class="widget">'
+					+'<div class="title">'
+					+'<h6>'+msg.plateTitle+'</h6>'
+					+'<div class="textC">'
+					+'<a href="?plateId='+msg.plateId+'" title="" class="button greenB"><span>修改版块</span></a>'
+	 				+'<a href="?plateId='+msg.plateId+'" title="" class="button redB"><span>删除版块</span></a>'
+	        		+'</div>'
+					+'<div class="clear"></div>'
+					+'</div>'
+					+'<p>'+msg.plateMessage+'</p>'
+					+'</div>';
+				$("form").after(content);
 			},
 			error: function(XMLHttpRequest,textStatus,errorThrown) {
 			    alert(errorThrown);
@@ -123,6 +129,34 @@ $(function(){
 		});
 		// 不提交到后台
 		return false;
+	});
+});
+// 使用Ajax实现加载页面获取到所有的版块信息
+$(function(){
+	// 发送ajax请求，获取到所有版块信息
+	$.ajax({
+		type: "POST",
+		url: "${pageContext.request.contextPath}/list_plates",
+		success: function(msg){
+			var content = '';
+			for(var item in msg){
+				content += '<div class="widget">'
+					+'<div class="title">'
+					+'<h6>'+msg[item].plateTitle+'</h6>'
+					+'<div class="textC">'
+					+'<a href="?plateId='+msg[item].plateId+'" title="" class="button greenB"><span>修改版块</span></a>'
+	 				+'<a href="?plateId='+msg[item].plateId+'" title="" class="button redB"><span>删除版块</span></a>'
+	        		+'</div>'
+					+'<div class="clear"></div>'
+					+'</div>'
+					+'<p>'+msg[item].plateMessage+'</p>'
+					+'</div>';
+			}
+			$("form").after(content);
+		},
+		error: function(XMLHttpRequest,textStatus,errorThrown) {
+		    alert(errorThrown);
+		}
 	});
 });
 </script>

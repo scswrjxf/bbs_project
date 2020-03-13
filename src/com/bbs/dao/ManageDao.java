@@ -3,6 +3,8 @@ package com.bbs.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.bbs.pojo.Plate;
 import com.bbs.tools.BaseDao;
@@ -40,4 +42,41 @@ public class ManageDao {
 		}
 		return null;
 	}
+	/**
+	 * 获取所有版块的列表
+	 * @return 获取到的所有版块列表信息
+	 */
+	public List<Plate> listPlates(){
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		// 保存所有版块信息(此处一定要初始化)
+		List<Plate> plates = new ArrayList<>();
+		try {
+			con = BaseDao.getCon();
+			String sql = "select * from bbs_plate";
+			ps = con.prepareStatement(sql);
+			rs = BaseDao.query(ps,null);
+			// 逐行把信息读取出来，放入列表中
+			while(rs.next()) {
+				plates.add(new Plate(
+						rs.getInt("plateId"),rs.getString("plateTitle"),
+						rs.getString("plateMessage"),rs.getInt("isEnable")));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			BaseDao.close(con, ps, rs);
+		}
+		return plates;
+	}
 }
+
+
+
+
+
+
+
+
+

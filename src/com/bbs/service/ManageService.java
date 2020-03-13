@@ -1,5 +1,7 @@
 package com.bbs.service;
 
+import java.util.List;
+
 import com.bbs.dao.ManageDao;
 import com.bbs.pojo.Plate;
 
@@ -13,5 +15,12 @@ public class ManageService {
 	 */
 	public Plate addPlate(Plate plate) {
 		return manageDao.addPlate(plate);
+	}
+	/**
+	 * 获取所有版块的列表
+	 * @return 获取到的所有版块列表信息
+	 */
+	public List<Plate> listPlates(){
+		return manageDao.listPlates();
 	}
 }
