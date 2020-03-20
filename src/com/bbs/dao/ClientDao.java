@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bbs.pojo.ClientInvatationAnswer;
 import com.bbs.pojo.ClientInvitation;
 import com.bbs.pojo.Invitation;
 import com.bbs.tools.BaseDao;
@@ -43,9 +44,10 @@ public class ClientDao {
 	}
 	/**
 	 * 得到所有符合要求的帖子
+	 * @param plateId--版块id
 	 * @return 帖子列表
 	 */
-	public List<ClientInvitation> listInvitations(){
+	public List<ClientInvitation> listInvitations(Integer plateId){
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -56,9 +58,13 @@ public class ClientDao {
 			// 增加了条件，必须通过审核，才能显示
 			String sql = "select invitationId,userAlice,invitationTitle,"
 					+ "invitationCreate"
-					+ " from bbs_invitation left join bbs_user"
+					+ " from bbs_invitation left join bbs_user" 
 					+ " on bbs_invitation.userId=bbs_user.userId"
-					+ " where bbs_invitation.isPass=1 order by invitationCreate desc";
+					+ " where bbs_invitation.isPass=1";
+			if(plateId != null) {
+				sql += " and plateId="+plateId;
+			}
+			sql += " order by invitationCreate desc";
 			ps = con.prepareStatement(sql);
 			rs = BaseDao.query(ps,null);
 			// 格式化日期时间
@@ -79,5 +85,40 @@ public class ClientDao {
 			BaseDao.close(con, ps, rs);
 		}
 		return invitations;
+	}
+	/**
+	 * 根据帖子id查询帖子
+	 * @param invitationId--帖子id
+	 * @return 成功返回找到的帖子对象，失败返回null
+	 */
+	public ClientInvatationAnswer findInvitationById(String invitationId) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ClientInvatationAnswer invitation = null;
+		try {
+			con = BaseDao.getCon();
+			String sql = "select invitationId,invitationTitle,userPhoto,invitationMessage,userAlice"
+					+ " from bbs_invitation left join bbs_user "
+					+ "on bbs_invitation.userId=bbs_user.userId "
+					+ "where invitationId=?";
+			ps = con.prepareStatement(sql);
+			rs = BaseDao.query(ps,new Object[] {invitationId}); 
+			// 逐行把信息读取出来，放入列表中
+			if(rs.next()) {
+				invitation = new ClientInvatationAnswer(
+						rs.getString("invitationId"),
+						URLDecoder.decode(rs.getString("invitationTitle"),"UTF-8"), 
+						rs.getString("userPhoto"),
+						URLDecoder.decode(rs.getString("invitationMessage"),"UTF-8"),
+						rs.getString("userAlice")
+				);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			BaseDao.close(con, ps, rs);
+		}
+		return invitation;
 	}
 }

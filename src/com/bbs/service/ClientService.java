@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import com.bbs.dao.ClientDao;
+import com.bbs.pojo.ClientInvatationAnswer;
 import com.bbs.pojo.ClientInvitation;
 import com.bbs.pojo.Invitation;
 
@@ -37,9 +38,18 @@ public class ClientService {
 	}
 	/**
 	 * 得到所有符合要求的帖子
+	 * @param plateId--版块id
 	 * @return 帖子列表
 	 */
-	public List<ClientInvitation> listInvitations(){
-		return clientDao.listInvitations();
+	public List<ClientInvitation> listInvitations(Integer plateId){
+		return clientDao.listInvitations(plateId);
+	}
+	/**
+	 * 根据帖子id查询帖子
+	 * @param invitationId--帖子id
+	 * @return 成功返回找到的帖子对象，失败返回null
+	 */
+	public ClientInvatationAnswer findInvitationById(String invitationId) {
+		return clientDao.findInvitationById(invitationId);
 	}
 }
