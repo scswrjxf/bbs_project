@@ -3,6 +3,7 @@ package com.bbs.service;
 import java.util.List;
 
 import com.bbs.dao.ManageDao;
+import com.bbs.pojo.Invitation;
 import com.bbs.pojo.Plate;
 
 public class ManageService {
@@ -32,11 +33,34 @@ public class ManageService {
 		return manageDao.deltePlateById(plateId);
 	}
 	/**
-	 * 修改plate的Titleh和Message
+	 * 修改plate的Title和Message
 	 * @param plate
 	 * @return 1-成功 0-失败
 	 */
 	public int alterPlate(Plate plate) {
 		return manageDao.alterPlate(plate);
+	}
+	/**
+	 * 获取所有帖子的列表
+	 * @return 帖子列表
+	 */
+	public List<Invitation> listiInvitations(){
+		return manageDao.listInvitations();
+	}
+	/**
+	 * 根据帖子id查询帖子
+	 * @param invitationId--帖子id
+	 * @return 成功返回找到的帖子对象，失败返回null
+	 */
+	public Invitation findInvitationById(String invitationId) {
+		return manageDao.findInvitationById(invitationId);
+	}
+	/**
+	 * 修改帖子的权限
+	 * @param invitation--帖子
+	 * @return 1-成功 0-失败
+	 */
+	public int alterInvitationPower(Invitation invitation) {
+		return manageDao.alterInvitationPower(invitation);
 	}
 }

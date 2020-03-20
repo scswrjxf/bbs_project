@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>登录</title>
+<title>帖子管理</title>
 <link href="${pageContext.request.contextPath}/static/css/main.css" rel="stylesheet" type="text/css" />
 
 <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
@@ -59,58 +61,78 @@
 
 <!-- Shared on MafiaShare.net  --><!-- Shared on MafiaShare.net  --></head>
 
-<body class="nobg loginPage">
+<body>
 
-<!-- Top fixed navigation -->
-<div class="topNav">
-    <div class="wrapper">
-        <div class="userNav">
-            <ul>
-                <li><a href="${pageContext.request.contextPath}//index" title=""><img src="${pageContext.request.contextPath}/static/images/icons/topnav/mainWebsite.png" alt="" /><span>回到首页</span></a></li>
-            </ul>
-        </div>
-        <div class="clear"></div>
+<!-- Left side content -->
+<%@ include file="admin_left_side.jsp" %>
+
+<!-- Right side -->
+<div id="rightSide">
+
+	<%@ include file="admin_top_nav.jsp" %>
+    
+	<!-- Dynamic table -->
+	<div class="widget">
+ 		<div class="title"><img src="images/icons/dark/full2.png" alt="" class="titleIcon" /><h6>用户管理</h6></div>                          
+		<table cellpadding="0" cellspacing="0" border="0" class="display dTable">
+            <thead>
+            <tr>
+            <th>账户</th>
+            <th>标题</th>
+            <th>审核</th>
+            <th>屏蔽</th>
+            <th>精华</th>
+            <th>修改时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            	<c:forEach items="${invitations }" var="inv">
+            		<tr class="gradeA">
+            		<td>${inv.userId }</td>
+            		<td><a href="${pageContext.request.contextPath}/invitation_power?invitationId=${inv.invitationId }">${inv.invitationTitle }</a></td>
+            		<c:choose>
+            			<c:when test="${inv.isPass == 0 }">
+            				<td class="center">待审核</td>
+            			</c:when>
+            			<c:when test="${inv.isPass == 1 }">
+            				<td class="center" style="color:green;">已通过</td>
+            			</c:when>
+            			<c:otherwise>
+            				<td class="center" style="color:red;">未通过</td>
+            			</c:otherwise>
+            		</c:choose>
+					<c:choose>
+						<c:when test="${inv.isEnable == 1 }">
+							<td class="center" style="color:red;">已屏蔽</td>
+						</c:when>
+						<c:otherwise>
+							<td class="center">&nbsp;</td>
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${inv.isCream == 1 }">
+							<td class="center" style="color:red;">精华</td>
+						</c:when>
+						<c:otherwise>
+							<td class="center">&nbsp;</td>
+						</c:otherwise>
+					</c:choose>
+            		<td><fmt:formatDate value="${inv.invitationModify }" pattern="yyyy-MM-dd HH-mm-ss"/></td>
+            		</tr>
+            	</c:forEach>
+            </tbody>
+   		</table>  
+	</div>
+    
+    <!-- Footer line -->
+    <div id="footer">
+        <div class="wrapper">&nbsp;</div>
     </div>
+
 </div>
 
-
-<!-- Main content wrapper -->
-<div class="loginWrapper">
-    <div class="loginLogo"><img src="${pageContext.request.contextPath}/static/images/loginLogo.png" alt="" /></div>
-    <div class="widget">
-        <div class="title"><img src="${pageContext.request.contextPath}/static/images/icons/dark/files.png" alt="" class="titleIcon" /><h6 style="color:red;">${empty message?'请登录':message}</h6></div>
-        <form action="${pageContext.request.contextPath}/login" id="validate" class="form">
-            <fieldset>
-                <div class="formRow">
-                    <label for="login">账户:</label>
-                    <div class="loginInput"><input type="text" name="userId" class="validate[required]" id="login" /></div>
-                    <div class="clear"></div>
-                </div>
-                
-                <div class="formRow">
-                    <label for="pass">密码:</label>
-                    <div class="loginInput"><input type="password" name="userPsw" class="validate[required]" id="pass" /></div>
-                    <div class="clear"></div>
-                </div>
-                
-                <div class="loginControl">
-                    <a href="${pageContext.request.contextPath}/register.jsp"><input type="button" value="注册" class="dredB logMeIn" style="margin-left:20px;"/></a>
-                    <input type="submit" value="登录" class="dredB logMeIn" />
-                    <a href="#">忘记密码</a>
-                    <div class="clear"></div>
-                </div>
-                
-            </fieldset>
-        </form>
-    </div>
-</div>    
-
-<!-- Footer line -->
-<div id="footer">
-    <div class="wrapper">&nbsp;</div>
-</div>
-
-
+<div class="clear"></div>
 </body>
 </html>
+
     
